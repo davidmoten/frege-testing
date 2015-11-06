@@ -17,6 +17,25 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.frege-lang</groupId>
+            <artifactId>frege</artifactId>
+            <version>3.23.370-g898bc8c</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.9.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.truth</groupId>
+            <artifactId>truth</artifactId>
+            <version>0.27</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -100,24 +119,36 @@
                 </executions>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>com.theoryinpractise.frege</groupId>
+                                        <artifactId>frege-maven-plugin</artifactId>
+                                        <versionRange>[1.0.7,)</versionRange>
+                                        <goals>
+                                            <goal>compile</goal>
+                                            <goal>test-compile</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.frege-lang</groupId>
-            <artifactId>frege</artifactId>
-            <version>3.23.288-gaa3af0c</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.9.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.truth</groupId>
-            <artifactId>truth</artifactId>
-            <version>0.27</version>
-        </dependency>
-    </dependencies>
 </project>
