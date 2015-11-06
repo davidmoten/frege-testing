@@ -101,6 +101,7 @@
                         <configuration>
                             <sources>
                                 <source>${project.build.directory}/generated-sources/frege</source>
+                                <source>src/main/frege</source>
                             </sources>
                         </configuration>
                     </execution>
@@ -113,6 +114,7 @@
                         <configuration>
                             <sources>
                                 <source>${project.build.directory}/generated-test-sources/frege</source>
+                                <source>src/test/frege</source>
                             </sources>
                         </configuration>
                     </execution>
