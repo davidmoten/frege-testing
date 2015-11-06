@@ -1,0 +1,7 @@
+module com.talios.frege.RTree where
+
+data Rectangle = Rectangle { x1 :: Float, y1 :: Float, x2 :: Float, y2 :: Float }
+data Entry = Entry { mbr :: Rectangle, object :: Object } 
+data RTree = 
+    Leaf { mbr :: Rectangle, entries :: [Entry] } 
+  | NonLeaf { mbr :: Rectangle, left :: RTree, right :: RTree }

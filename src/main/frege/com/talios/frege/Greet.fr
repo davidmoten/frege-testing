@@ -12,3 +12,9 @@ data Field = StandardField {name :: String, title :: String, fieldType :: String
 
 derive Show Field
 
+
+
+
+
+ 
+
