@@ -8,6 +8,6 @@ data Node =
 data RTree = 
     Nil
   | Node
-add :: (RTree, Entry) -> RTree
-add (Nil , entry ) = Leaf entry.mbr [entry]
+--add :: (RTree, Entry) -> RTree
+--add (Nil , entry ) = Leaf entry.mbr [entry]
 
