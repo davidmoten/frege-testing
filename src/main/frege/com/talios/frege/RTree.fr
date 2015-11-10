@@ -1,13 +1,45 @@
 module com.talios.frege.RTree where
 
-data Rectangle = Rectangle { x1 :: Float, y1 :: Float, x2 :: Float, y2 :: Float }
+data Rectangle = Rectangle { minX :: Float, minY :: Float, maxX :: Float, maxY :: Float }
 data Entry = Entry { mbr :: Rectangle , object :: Object } 
-data Node = 
-    Leaf { mbr :: Rectangle , entries :: [Entry] }  
-  | NonLeaf { mbr :: Rectangle , left :: Node , right :: Node }
 data RTree = 
     Nil
-  | Node
---add :: (RTree, Entry) -> RTree
+  | Leaf { mbr :: Rectangle , entries :: [Entry] }  
+  | NonLeaf { mbr :: Rectangle , left :: RTree , right :: RTree }
+  
+mbr :: Rectangle -> Rectangle -> Rectangle
+mbr a b = Rectangle { 
+  minX = min a.minX b.minX , 
+  minY = min a.minY b.minY ,
+  maxX = max a.maxX b.maxX , 
+  maxY = max a.maxY b.maxY 
+}
+
+mbrEntries :: [Entry] -> Rectangle
+mbrEntries entries
+  | (length entries) == 1 = (head entries).mbr
+  | _ = mbr (head entries).mbr (mbrEntries (tail entries))
+  
+
+mapTuple :: (a -> b) -> (a, a) -> (b, b)
+mapTuple f (x, y) = (f x, f y)
+
+toRTree :: [Entry] -> RTree
+toRTree entries = Nil
+
+split :: [Entry] -> (RTree, RTree)
+split entries = mapTuple toRTree $ splitAt (div (length entries) 2) entries 
+
+maxEntriesPerNode = 5
+ 
+add :: RTree -> Entry -> RTree
+add Nil entry = Leaf { mbr = entry.mbr, entries = [entry]}
+add tree entry = tree
+
+add (Leaf {mbr = mbr1, entries = entries1}) entry
+    | (length entries1) <= maxEntriesPerNode = 
+        Leaf {mbr = mbr mbr1 entry.mbr , entries = entry:entries1 }
+    | _ = Nil 
+--  | (length entries) <= maxEntriesPerNode =   
 --add (Nil , entry ) = Leaf entry.mbr [entry]
 
